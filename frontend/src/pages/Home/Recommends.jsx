@@ -6,19 +6,19 @@ const Recommends = () => {
   const [recommends, setRecommends] = useState([]);
 
   useEffect(() => {
-    fetch("menu.json")
+    fetch("http://localhost:8000/api/menu-details")
       .then((res) => res.json())
       .then((data) => {
-        const recommendItem = data.filter((item) => item.category === "popular");
-        setRecommends(recommendItem);
+        const popular = data.data.filter((item) => item.category === "popular");
+        setRecommends(popular);
       });
   }, []);
   return (
     <section>
       <SectionTitle heading={"CHEF RECOMMENDS"} subHeading={"Should Try"} />
-      <div className="md:flex gap-4 justify-center items-center">
-        {recommends.map((recommend) => (
-          <Card key={recommend._id} recommend={recommend} />
+      <div className="grid md:grid-cols-3 gap-10 justify-center">
+        {recommends.map((items) => (
+          <Card key={items._id} items={items} />
         ))}
       </div>
     </section>

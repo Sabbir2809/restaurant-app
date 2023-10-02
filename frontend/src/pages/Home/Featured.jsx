@@ -18,7 +18,9 @@ const Featured = () => {
             totam! Corrupti mollitia nulla dolore quos nam dolorum corporis quo dicta quisquam. Laudantium ad,
             officia maiores ab temporibus ex sapiente tempore at earum expedita in, omnis sequi tempora!
           </p>
-          <button className="btn btn-outline border-0 border-b-4 mt-4">Order Now</button>
+          <button className="btn btn-outline bg-slate-200 border-0 border-b-4 border-orange-500  mt-4">
+            Order Now
+          </button>
         </div>
       </div>
     </div>

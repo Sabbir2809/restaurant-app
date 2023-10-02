@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Restaurant App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sabbir2809/restaurant-app.git"
+  },
+  "keywords": [
+    "reactJs",
+    "NodeJs",
+    "ExpressJs",
+    "MongoDB"
+  ],
+  "author": "Sabbir Hossain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sabbir2809/restaurant-app/issues"
+  },
+  "homepage": "https://github.com/Sabbir2809/restaurant-app#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.0.2",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

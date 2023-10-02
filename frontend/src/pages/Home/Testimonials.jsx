@@ -12,9 +12,9 @@ const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("reviews.json")
+    fetch("http://localhost:8000/api/review-details")
       .then((res) => res.json())
-      .then((data) => setReviews(data));
+      .then((data) => setReviews(data.data));
   }, []);
   return (
     <section className="my-20">
