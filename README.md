@@ -21,3 +21,12 @@
 1. Display food items on different tabs
 1. Select right tab based on the category
 1. Load menu data from server
+
+---
+
+1. simple login form
+1. Setup ReCaptcha And Validate Captcha
+1. Firebase Project Setup
+1. Setup Login Page And Auth Context
+1. Explore React Hook Form Validation, Error Handling
+1. Logout, Sweet Alert And Some Bug Fix.
