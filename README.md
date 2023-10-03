@@ -33,3 +33,10 @@
 1. Logout, Sweet Alert And Some Bug Fix.
 1. Private Route And Redirect User After Login
 1. Summary And Update User Profile
+
+---
+
+1. API naming convention and API to save Cart
+1. Save Cart data to the server
+1. Simple Overview of React Query and load data
+1. Show add to cart count on navbar
