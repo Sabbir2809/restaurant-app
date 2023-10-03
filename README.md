@@ -29,4 +29,7 @@
 1. Firebase Project Setup
 1. Setup Login Page And Auth Context
 1. Explore React Hook Form Validation, Error Handling
+1. Use Regex Validation In React Hook Form And Signup
 1. Logout, Sweet Alert And Some Bug Fix.
+1. Private Route And Redirect User After Login
+1. Summary And Update User Profile

@@ -37,10 +37,18 @@ const Navbar = () => {
             <li>
               <Link to={"/order/salad"}>Our Shop</Link>
             </li>
+            <li>
+              <Link to={"/secret"}>Secret</Link>
+            </li>
             {user ? (
-              <li>
-                <Link onClick={handleLogOut}>Logout</Link>
-              </li>
+              <>
+                <li>
+                  <Link>{user?.displayName}</Link>
+                </li>
+                <li>
+                  <Link onClick={handleLogOut}>Logout</Link>
+                </li>
+              </>
             ) : (
               <li>
                 <Link to={"/login"}>Login</Link>
@@ -64,10 +72,18 @@ const Navbar = () => {
           <li>
             <Link to={"/order/salad"}>Our Shop</Link>
           </li>
+          <li>
+            <Link to={"/secret"}>Secret</Link>
+          </li>
           {user ? (
-            <li>
-              <Link onClick={handleLogOut}>Logout</Link>
-            </li>
+            <>
+              <li>
+                <Link>{user?.displayName}</Link>
+              </li>
+              <li>
+                <Link onClick={handleLogOut}>Logout</Link>
+              </li>
+            </>
           ) : (
             <li>
               <Link to={"/login"}>Login</Link>
