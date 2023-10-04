@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import { AuthContext } from "../../providers/AuthProvider";
 
@@ -32,24 +32,24 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box text-white w-52">
             <li>
-              <Link to={"/"}>Home</Link>
+              <NavLink to={"/"}>Home</NavLink>
             </li>
             <li>
-              <Link to={"/menu"}>Our Menu</Link>
+              <NavLink to={"/menu"}>Our Menu</NavLink>
             </li>
             <li>
-              <Link to={"/order/salad"}>Our Shop</Link>
+              <NavLink to={"/order/salad"}>Our Shop</NavLink>
             </li>
             <li>
-              <Link to={"/secret"}>Secret</Link>
+              <NavLink to={"/secret"}>Secret</NavLink>
             </li>
             <li>
-              <Link to={"/"}>
+              <NavLink to={"/dashboard/my-cart"}>
                 <div className="indicator">
                   <FaShoppingCart />
-                  <span className="badge badge-sm indicator-item">{cart?.data.length || 0}</span>
+                  <span className="badge badge-sm indicator-item">{cart?.data?.length || 0}</span>
                 </div>
-              </Link>
+              </NavLink>
             </li>
             {user ? (
               <>
@@ -68,31 +68,31 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <Link to={"/"} className="btn btn-ghost normal-case text-xl">
+        <NavLink to={"/"} className="btn btn-ghost normal-case text-xl">
           Restaurant App
-        </Link>
+        </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to={"/"}>Home</Link>
+            <NavLink to={"/"}>Home</NavLink>
           </li>
           <li>
-            <Link to={"/menu"}>Our Menu</Link>
+            <NavLink to={"/menu"}>Our Menu</NavLink>
           </li>
           <li>
-            <Link to={"/order/salad"}>Our Shop</Link>
+            <NavLink to={"/order/salad"}>Our Shop</NavLink>
           </li>
           <li>
-            <Link to={"/secret"}>Secret</Link>
+            <NavLink to={"/secret"}>Secret</NavLink>
           </li>
           <li>
-            <Link to={"/"}>
+            <NavLink to={"/dashboard/my-cart"}>
               <div className="indicator">
                 <FaShoppingCart />
-                <span className="badge badge-sm indicator-item">{cart?.data.length || 0}</span>
+                <span className="badge badge-sm indicator-item">{cart?.data?.length || 0}</span>
               </div>
-            </Link>
+            </NavLink>
           </li>
           {user ? (
             <>

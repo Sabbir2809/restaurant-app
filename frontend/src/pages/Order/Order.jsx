@@ -11,14 +11,17 @@ import OrderTab from "./OrderTab";
 const Order = () => {
   const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
   const { category } = useParams();
+
   const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu] = useMenu();
+
   const dessert = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const soup = menu.filter((item) => item.category === "soup");
   const salad = menu.filter((item) => item.category === "salad");
   const drinks = menu.filter((item) => item.category === "drinks");
+  const offered = menu.filter((item) => item.category === "offered");
   return (
     <div>
       <HelmetSEO title={"Restaurant || Order Shop"} />
@@ -30,6 +33,7 @@ const Order = () => {
           <Tab>Soup</Tab>
           <Tab>Dessert</Tab>
           <Tab>Drinks</Tab>
+          <Tab>Offered</Tab>
         </TabList>
         <TabPanel>
           <OrderTab items={salad} />
@@ -45,6 +49,9 @@ const Order = () => {
         </TabPanel>
         <TabPanel>
           <OrderTab items={drinks} />
+        </TabPanel>
+        <TabPanel>
+          <OrderTab items={offered} />
         </TabPanel>
       </Tabs>
     </div>

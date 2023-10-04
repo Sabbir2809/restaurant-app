@@ -40,3 +40,7 @@
 1. Save Cart data to the server
 1. Simple Overview of React Query and load data
 1. Show add to cart count on navbar
+1. Create Dashboard route and Dashboard navigation
+1. Cart data from custom hook and calculate total price
+1. Display cart items to review before order
+1. Delete cart item and sync data using refetch

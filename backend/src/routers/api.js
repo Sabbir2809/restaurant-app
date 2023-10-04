@@ -9,5 +9,6 @@ router.get("/menu-details", menuController.menuDetails);
 router.get("/review-details", reviewController.reviewDetails);
 router.post("/create-carts", cartController.createCart);
 router.get("/carts", cartController.cartDetails);
+router.delete("/delete-cart/:id", cartController.deleteCart);
 
 module.exports = router;
