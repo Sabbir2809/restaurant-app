@@ -20,7 +20,7 @@ const Card = ({ items }) => {
       image,
       price,
       recipe,
-      email: user.email,
+      email: user?.email,
     };
     if (user) {
       fetch("http://localhost:8000/api/create-carts", {

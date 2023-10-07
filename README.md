@@ -44,3 +44,8 @@
 1. Cart data from custom hook and calculate total price
 1. Display cart items to review before order
 1. Delete cart item and sync data using refetch
+
+---
+
+1. save user data mongoDB
+1. Google Sign and when to save user info

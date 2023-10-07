@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
@@ -16,23 +17,31 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
+  // handle submit
   const onSubmit = (data) => {
-    console.log(data);
-    createUser(data.email, data.password).then((result) => {
-      result.user;
+    createUser(data.email, data.password).then(() => {
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("User Profile Info Updated");
-          reset();
-
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "User Registration Successful",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
+          const info = { name: data.name, email: data.email };
+          fetch("http://localhost:8000/api/user-profile", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(info),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.status === true) {
+                reset();
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "User Registration Successful",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
         })
         .catch((error) => {
           console.error(error.message);
@@ -120,6 +129,7 @@ const SignUp = () => {
                 Already Account? <Link to={"/login"}>Please Login</Link>
               </small>
             </p>
+            <SocialLogin />
           </div>
         </div>
       </div>
