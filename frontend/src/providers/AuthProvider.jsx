@@ -1,8 +1,10 @@
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -11,13 +13,16 @@ import { app } from "../firebase/firebase.config";
 
 // AuthContext
 export const AuthContext = createContext(null);
-// firebase
+
+// firebase auth
 const auth = getAuth(app);
 
 export const AuthProvider = ({ children }) => {
   // state
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const googleProvider = new GoogleAuthProvider();
 
   // Create a password-based account
   const createUser = (email, password) => {
@@ -29,6 +34,12 @@ export const AuthProvider = ({ children }) => {
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // signIn with Google
+  const googleSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
   };
 
   // update user profile
@@ -57,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // universal value access
-  const authInfo = { user, loading, createUser, signIn, logout, updateUserProfile };
+  const authInfo = { user, loading, createUser, signIn, googleSignIn, logout, updateUserProfile };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };

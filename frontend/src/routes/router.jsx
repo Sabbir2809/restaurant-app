@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../layout/Dashboard";
 import MainLayout from "../layout/MainLayout";
 import Secret from "../pages/Common/Secret";
+import AllUsers from "../pages/Dashboard/AllUsers";
 import MyCart from "../pages/Dashboard/MyCart";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "my-cart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "all-users",
+        element: <AllUsers></AllUsers>,
       },
     ],
   },

@@ -54,83 +54,84 @@ const SignUp = () => {
       <Helmet>
         <title>Restaurant || Sign Up</title>
       </Helmet>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col md:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Sign Up</h1>
-            <p className="py-6">Restaurant Registration Page</p>
+      <div className="bg-gray-100 flex justify-center items-center h-screen">
+        <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+          <h1 className="text-2xl font-semibold mb-4">Sign Up Page</h1>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-600">
+                Name
+              </label>
+              <input
+                type="text"
+                {...register("name", { required: true })}
+                placeholder="Enter Name"
+                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                id="name"
+              />
+              {errors.name && <span className="text-red-600">Name is Required</span>}
+            </div>
+            <div className="mb-4">
+              <label htmlFor="photoURL" className="block text-gray-600">
+                Photo URL
+              </label>
+              <input
+                type="text"
+                {...register("photoURL", { required: true })}
+                placeholder="Enter Photo URL"
+                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                id="photoURL"
+              />
+              {errors.photoURL && <span className="text-red-600">Photo URL is Required</span>}
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-gray-600">
+                Email
+              </label>
+              <input
+                type="email"
+                {...register("email", {
+                  required: true,
+                  pattern:
+                    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                })}
+                placeholder="Enter Email"
+                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                id="email"
+              />
+              {errors.email && <span className="text-red-600">Email is Required</span>}
+            </div>
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-gray-600">
+                Password
+              </label>
+              <input
+                type="password"
+                {...register("password", { required: true, minLength: 6 })}
+                placeholder="Enter Password"
+                id="password"
+                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+              />
+              {errors.password?.type === "required" && (
+                <span className="text-red-600">Password is Required</span>
+              )}
+              {errors.password?.type === "minLength" && (
+                <span className="text-red-600">Password Length 6 Character</span>
+              )}
+            </div>
+            <input
+              type="submit"
+              value="Sign Up"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+            />
+          </form>
+          <div className="mt-6 text-blue-500 text-center">
+            Already Account? <Link to={"/login"}>Please Login</Link>
           </div>
-          <div className="card  w-full max-w-sm shadow-2xl bg-base-100">
-            <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
-                  type="text"
-                  {...register("name", { required: true })}
-                  placeholder="Enter Name"
-                  className="input input-bordered"
-                />
-                {errors.name && <span className="text-red-600">Name is Required</span>}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Photo URL</span>
-                </label>
-                <input
-                  type="text"
-                  {...register("photoURL", { required: true })}
-                  placeholder="Enter Photo URL"
-                  className="input input-bordered"
-                />
-                {errors.photoURL && <span className="text-red-600">Photo URL is Required</span>}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  {...register("email", {
-                    required: true,
-                    pattern:
-                      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-                  })}
-                  placeholder="Enter Email"
-                  className="input input-bordered"
-                />
-                {errors.email && <span className="text-red-600">Email is Required</span>}
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  {...register("password", { required: true, minLength: 6 })}
-                  placeholder="Enter Password"
-                  className="input input-bordered"
-                />
-                {errors.password?.type === "required" && (
-                  <span className="text-red-600">Password is Required</span>
-                )}
-                {errors.password?.type === "minLength" && (
-                  <span className="text-red-600">Password Length 6 Character</span>
-                )}
-              </div>
-
-              <div className="form-control mt-6">
-                <input type="submit" value="Login" className="btn btn-primary" />
-              </div>
-            </form>
-            <p className="text-center m-4">
-              <small>
-                Already Account? <Link to={"/login"}>Please Login</Link>
-              </small>
-            </p>
-            <SocialLogin />
-          </div>
+          <SocialLogin></SocialLogin>
+        </div>
+        <div className="w-1/2 h-screen hidden lg:block">
+          <img src="./../../../public/login.svg" alt="Logo" className="object-cover w-full h-full" />
         </div>
       </div>
     </>

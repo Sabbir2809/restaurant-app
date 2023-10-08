@@ -49,3 +49,5 @@
 
 1. save user data mongoDB
 1. Google Sign and when to save user info
+1. Save User if he does not exists in the database
+1. Load all users on the Dashboard page

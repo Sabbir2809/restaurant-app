@@ -14,5 +14,6 @@ router.delete("/delete-cart/:id", cartController.deleteCart);
 
 // user
 router.post("/user-profile", userController.userProfile);
+router.get("/all-users", userController.getAllUsers);
 
 module.exports = router;
