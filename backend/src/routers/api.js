@@ -9,6 +9,13 @@ const router = express.Router();
 
 // API Endpoints:
 router.get("/menu-details", menuController.menuDetails);
+router.post("/add-new-item", authVerifyMiddleware, verifyAdminMiddleware, menuController.createNewMenu);
+router.delete(
+  "/delete-menu-item/:id",
+  authVerifyMiddleware,
+  verifyAdminMiddleware,
+  menuController.deleteMenuItem
+);
 router.get("/review-details", reviewController.reviewDetails);
 router.post("/create-carts", cartController.createCart);
 router.get("/carts", authVerifyMiddleware, cartController.cartDetails);

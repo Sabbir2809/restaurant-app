@@ -56,3 +56,13 @@
 1. Send JWT token to back end for verification
 1. Limit the feature based on admin level
 1. (super advanced) Make user api secure and verify Admin
+
+---
+
+1. Make Admin only link secure using AdminRoute
+1. Create Add item form using react hook form
+1. Upload image to image hosting server imgbb and get image url
+1. Get image url and create save new item api
+1. sava new item to the server and make api secure
+1. Create Manage Items admin route and load all menu items
+1. Delete menu item with VerifyAdmin middleware
