@@ -1,13 +1,11 @@
-import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useAuth } from "../context/AuthContext";
 import useCart from "../hooks/useCart";
-import { AuthContext } from "../providers/AuthProvider";
 
 const Card = ({ items }) => {
   const { image, price, name, recipe, _id } = items;
-  const { user } = useContext(AuthContext);
-
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 

@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import SectionTitle from "../../components/SectionTitle";
+import { useAuth } from "../../context/AuthContext";
 import useCart from "../../hooks/useCart";
-import { AuthContext } from "../../providers/AuthProvider";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   const totalPrice = cart?.data?.reduce((sum, item) => item.price + sum, 0);
 

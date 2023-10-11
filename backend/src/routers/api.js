@@ -4,6 +4,7 @@ const reviewController = require("../controllers/reviewController");
 const cartController = require("../controllers/cartController");
 const userController = require("../controllers/userController");
 const authVerifyMiddleware = require("../middleware/authVerifyMiddleware");
+const verifyAdminMiddleware = require("../middleware/verifyAdminMiddleware");
 const router = express.Router();
 
 // API Endpoints:
@@ -15,8 +16,9 @@ router.delete("/delete-cart/:id", cartController.deleteCart);
 
 // user
 router.post("/user-profile", userController.userProfile);
-router.get("/all-users", userController.getAllUsers);
+router.get("/all-users", authVerifyMiddleware, verifyAdminMiddleware, userController.getAllUsers);
 router.patch("/all-users/admin/:id", userController.makeAdmin);
+router.get("/all-users/admin/:email", authVerifyMiddleware, userController.isAdmin);
 
 // JWT
 router.post("/jwt", userController.JWT);

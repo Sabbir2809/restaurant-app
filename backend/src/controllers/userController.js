@@ -8,7 +8,6 @@ exports.userProfile = async (req, res) => {
     const { email } = reqBody;
 
     const isExisting = await UserModel.findOne({ email });
-    console.log(isExisting);
 
     if (isExisting) {
       return res.status(400).json({ status: false, message: "Email Already Exist" });
@@ -50,6 +49,26 @@ exports.makeAdmin = async (req, res) => {
     res.status(200).json({
       status: true,
       data: data,
+    });
+  } catch (error) {
+    res.status(500).json({ status: false, error: error.message });
+  }
+};
+
+exports.isAdmin = async (req, res) => {
+  try {
+    const email = req.params.email;
+
+    if (req.decoded.email !== email) {
+      return res.status(401).json({ status: false, message: "Unauthorized Access" });
+    }
+
+    const query = { email: email };
+    const user = await UserModel.findOne(query);
+
+    res.status(200).json({
+      status: true,
+      admin: user?.role === "admin",
     });
   } catch (error) {
     res.status(500).json({ status: false, error: error.message });

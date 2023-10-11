@@ -9,20 +9,22 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
-
-// AuthContext
-export const AuthContext = createContext(null);
-
 // firebase auth
 const auth = getAuth(app);
 
+// AuthContext
+const AuthContext = createContext();
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+// AuthProvider
 export const AuthProvider = ({ children }) => {
   // state
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const googleProvider = new GoogleAuthProvider();
 
   // Create a password-based account
@@ -61,7 +63,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
 
       if (currentUser) {
         axios
@@ -70,6 +71,7 @@ export const AuthProvider = ({ children }) => {
           })
           .then((data) => {
             localStorage.setItem("access-token", data.data.token);
+            setLoading(false);
           });
       } else {
         localStorage.removeItem("access-token");

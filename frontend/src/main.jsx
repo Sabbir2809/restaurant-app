@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
-import { AuthProvider } from "./providers/AuthProvider.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 import { router } from "./routes/router.jsx";
 import "./styles/index.css";
 const queryClient = new QueryClient();

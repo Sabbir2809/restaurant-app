@@ -54,3 +54,5 @@
 1. Make User Admin and install JWT
 1. Create a JWT token and save it on client side
 1. Send JWT token to back end for verification
+1. Limit the feature based on admin level
+1. (super advanced) Make user api secure and verify Admin

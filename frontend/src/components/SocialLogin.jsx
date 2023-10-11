@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
+import { useAuth } from "../context/AuthContext";
 
 const SocialLogin = () => {
-  const { googleSignIn } = useContext(AuthContext);
+  const { googleSignIn } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
