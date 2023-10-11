@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -61,6 +62,18 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+
+      if (currentUser) {
+        axios
+          .post("http://localhost:8000/api/jwt", {
+            email: currentUser.email,
+          })
+          .then((data) => {
+            localStorage.setItem("access-token", data.data.token);
+          });
+      } else {
+        localStorage.removeItem("access-token");
+      }
     });
     return () => {
       return unsubscribe();

@@ -17,10 +17,16 @@ exports.createCart = async (req, res) => {
 exports.cartDetails = async (req, res) => {
   try {
     const email = req.query.email;
+    const decodedEmail = req.decoded.email;
 
     if (!email) {
-      res.status(400).json({ status: false, message: "Data Not Found" });
+      return res.status(404).json({ status: false, message: "Data Not Found" });
     }
+
+    if (email !== decodedEmail) {
+      return res.status(403).json({ status: false, message: "Unauthorized Access" });
+    }
+
     const data = await CartModel.find({ email });
     res.status(200).json({
       status: true,

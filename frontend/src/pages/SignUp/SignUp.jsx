@@ -131,7 +131,7 @@ const SignUp = () => {
           <SocialLogin></SocialLogin>
         </div>
         <div className="w-1/2 h-screen hidden lg:block">
-          <img src="./../../../public/login.svg" alt="Logo" className="object-cover w-full h-full" />
+          <img src="login.svg" alt="Logo" className="object-cover w-full h-full" />
         </div>
       </div>
     </>

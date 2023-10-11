@@ -1,12 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { FaEdit, FaTrashAlt, FaUserShield } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await fetch("http://localhost:8000/api/all-users");
     return res.json();
   });
+
+  const handleMakeAdmin = (user) => {
+    fetch(`http://localhost:8000/api/all-users/admin/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `${user.name} is an Admin Now`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   const handleUserDelete = () => {};
 
@@ -15,7 +35,7 @@ const AllUsers = () => {
       <Helmet>
         <title>Restaurant || All Users</title>
       </Helmet>
-      <h2 className="text-2xl font-semibold mb-4">All Users: {users.data.length}</h2>
+      <h2 className="text-2xl font-semibold mb-4">All Users: {users?.data?.length}</h2>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -29,7 +49,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.data.map((user, index) => (
+            {users?.data?.map((user, index) => (
               <tr key={user._id}>
                 <th>{index + 1}</th>
                 <td>{user.name}</td>
@@ -38,7 +58,7 @@ const AllUsers = () => {
                   {user.role === "admin" ? (
                     "admin"
                   ) : (
-                    <button className="btn btn-md text-green-500">
+                    <button onClick={() => handleMakeAdmin(user)} className="btn btn-md text-green-500">
                       <FaUserShield />
                     </button>
                   )}

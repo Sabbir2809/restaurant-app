@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [cart] = useCart();
   // TODO:
   const isAdmin = true;
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

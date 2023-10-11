@@ -51,3 +51,6 @@
 1. Google Sign and when to save user info
 1. Save User if he does not exists in the database
 1. Load all users on the Dashboard page
+1. Make User Admin and install JWT
+1. Create a JWT token and save it on client side
+1. Send JWT token to back end for verification
