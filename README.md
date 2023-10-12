@@ -77,4 +77,5 @@
 1. Get Price for payment intent and understand array reduce
 1. Use Confirm Card Payment to Process Payment
 1. Display payment error and success Message
-1. 
+1. Create payment api and send payment data to the server
+1. Save payment info to the database

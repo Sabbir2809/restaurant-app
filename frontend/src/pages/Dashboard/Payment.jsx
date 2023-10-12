@@ -11,7 +11,7 @@ const Payment = () => {
   const [cart] = useCart();
 
   const total = cart?.data?.reduce((sum, item) => item.price + sum, 0);
-  const price = parseFloat(total.toFixed(2));
+  const price = parseFloat(total?.toFixed(2));
 
   return (
     <div className="w-full px-10">
@@ -20,7 +20,7 @@ const Payment = () => {
       </Helmet>
       <SectionTitle heading={"Payment"} subHeading={"Please Process"} />
       <Elements stripe={stripePromise}>
-        <CheckoutForm price={price}></CheckoutForm>
+        <CheckoutForm price={price} cart={cart.data}></CheckoutForm>
       </Elements>
     </div>
   );

@@ -28,6 +28,7 @@ router.delete("/delete-cart/:id", cartController.deleteCart);
 
 // create payment intent
 router.post("/create-payment-intent", authVerifyMiddleware, payment.createPaymentIntent);
+router.post("/payments", authVerifyMiddleware, payment.paymentInfo);
 
 // user and admin
 router.post("/user-profile", userController.userProfile);

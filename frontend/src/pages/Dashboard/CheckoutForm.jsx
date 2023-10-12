@@ -1,9 +1,12 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useAuth } from "../../context/AuthContext";
+import "./../../styles/chekoutForm.css";
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ price, cart }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
@@ -11,23 +14,24 @@ const CheckoutForm = ({ price }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState();
   const [transactionId, setTransactionId] = useState("");
-
   const token = localStorage.getItem("access-token");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(price);
-    axios
-      .post(
-        "http://localhost:8000/api/create-payment-intent",
-        { price },
-        {
-          headers: { token: token },
-        }
-      )
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
-  }, []);
+    if (price > 0) {
+      axios
+        .post(
+          "http://localhost:8000/api/create-payment-intent",
+          { price },
+          {
+            headers: { token: token },
+          }
+        )
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
+    }
+  }, [price, token]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -76,6 +80,34 @@ const CheckoutForm = ({ price }) => {
     setProcessing(false);
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
+      // save payment information to the server
+      const payment = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        price,
+        quantity: cart.length,
+        cartItems: cart?.map((item) => item._id),
+        menuItemId: cart?.map((item) => item.menuItemId),
+        itemNames: cart?.map((item) => item.name),
+        status: "pending",
+      };
+      axios
+        .post("http://localhost:8000/api/payments", payment, {
+          headers: { token: token },
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.status) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `${paymentIntent.id} Successful Payment`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          }
+        });
     }
   };
 
