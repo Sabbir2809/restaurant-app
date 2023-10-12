@@ -8,9 +8,7 @@ const AllUsers = () => {
 
   const { data: users = [], refetch } = useQuery(["users"], async () => {
     const res = await fetch("http://localhost:8000/api/all-users", {
-      headers: {
-        token: token,
-      },
+      headers: { token: token },
     });
     return res.json();
   });

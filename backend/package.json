@@ -32,7 +32,8 @@
     "express-rate-limit": "^7.0.2",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.5.3"
+    "mongoose": "^7.5.3",
+    "stripe": "^13.10.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

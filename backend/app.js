@@ -1,10 +1,10 @@
 // Package Dependencies
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
-require("dotenv").config();
 // router file import
 const router = require("./src/routers/api");
 

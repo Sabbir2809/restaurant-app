@@ -66,3 +66,15 @@
 1. sava new item to the server and make api secure
 1. Create Manage Items admin route and load all menu items
 1. Delete menu item with VerifyAdmin middleware
+
+---
+
+1. Create Payment route
+1. Install stripe, stripe for react and create card element
+1. Create Stripe account and use publishable key
+1. Use Test card and display card error
+1. Server side payment intents API to get client Secret from stripe
+1. Get Price for payment intent and understand array reduce
+1. Use Confirm Card Payment to Process Payment
+1. Display payment error and success Message
+1. 

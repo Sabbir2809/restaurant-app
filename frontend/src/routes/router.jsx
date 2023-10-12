@@ -6,6 +6,7 @@ import AddItem from "../pages/Dashboard/AddItem";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import ManageItems from "../pages/Dashboard/ManageItems";
 import MyCart from "../pages/Dashboard/MyCart";
+import Payment from "../pages/Dashboard/Payment";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Menu from "../pages/Menu/Menu";
@@ -61,6 +62,12 @@ export const router = createBrowserRouter([
         path: "my-cart",
         element: <MyCart></MyCart>,
       },
+      {
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+
+      // admin routes
       {
         path: "all-users",
         element: (
