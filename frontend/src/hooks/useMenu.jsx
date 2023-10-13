@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+
 const useMenu = () => {
   const {
     data: menu = [],
@@ -12,7 +13,7 @@ const useMenu = () => {
       return response.data.data;
     },
   });
-  return [menu, refetch];
+  return [menu, refetch, loading];
 };
 
 export default useMenu;

@@ -11,16 +11,15 @@ import {
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
-// firebase auth
-const auth = getAuth(app);
+const auth = getAuth(app); // firebase auth
 
-// AuthContext
+// ::::: AuthContext :::::
 const AuthContext = createContext();
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// AuthProvider
+// ::::: AuthProvider :::::
 export const AuthProvider = ({ children }) => {
   // state
   const [user, setUser] = useState(null);

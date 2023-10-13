@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const UserModel = require("../models/UserModel");
 const { EncodedToken } = require("../utility/JWT");
+const MenuModel = require("../models/menuModel");
+const PaymentModel = require("../models/PaymentModel");
 
 exports.userProfile = async (req, res) => {
   try {
@@ -69,6 +71,61 @@ exports.isAdmin = async (req, res) => {
     res.status(200).json({
       status: true,
       admin: user?.role === "admin",
+    });
+  } catch (error) {
+    res.status(500).json({ status: false, error: error.message });
+  }
+};
+
+exports.adminHome = async (req, res) => {
+  try {
+    const users = await UserModel.find().count("total");
+    const menuItems = await MenuModel.find().count("total");
+    const orders = await PaymentModel.find().count("total");
+    const totalRevenue = await PaymentModel.aggregate([
+      {
+        $group: {
+          _id: null,
+          total: { $sum: "$price" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      status: true,
+      data: {
+        users,
+        menuItems,
+        orders,
+        totalRevenue: totalRevenue[0].total,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ status: false, error: error.message });
+  }
+};
+
+exports.orderStats = async (req, res) => {
+  try {
+    const data = await PaymentModel.aggregate([
+      {
+        $lookup: {
+          from: "menus",
+          localField: "_id",
+          foreignField: "_id",
+          as: "menuItem",
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      status: true,
+      data: data,
     });
   } catch (error) {
     res.status(500).json({ status: false, error: error.message });

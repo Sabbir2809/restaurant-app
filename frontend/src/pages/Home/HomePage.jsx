@@ -7,9 +7,9 @@ import PopularMenu from "./PopularMenu";
 import Recommends from "./Recommends";
 import Testimonials from "./Testimonials";
 
-const Home = () => {
+const HomePage = () => {
   return (
-    <div>
+    <>
       <Helmet>
         <title>Restaurant || Home</title>
       </Helmet>
@@ -20,8 +20,8 @@ const Home = () => {
       <Recommends></Recommends>
       <Featured></Featured>
       <Testimonials></Testimonials>
-    </div>
+    </>
   );
 };
 
-export default Home;
+export default HomePage;

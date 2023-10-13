@@ -1,5 +1,6 @@
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 import "swiper/css";
@@ -12,13 +13,13 @@ const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/review-details")
-      .then((res) => res.json())
-      .then((data) => setReviews(data.data));
+    axios.get("http://localhost:8000/api/review-details").then(({ data }) => setReviews(data.data));
   }, []);
+
   return (
     <section className="my-20">
       <SectionTitle heading={"Testimonials"} subHeading={"what Our Client Say"} />
+      {/* package name: swiper */}
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {reviews.map((review) => (
           <SwiperSlide key={review._id}>

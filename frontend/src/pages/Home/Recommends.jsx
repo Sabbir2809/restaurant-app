@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import SectionTitle from "../../components/SectionTitle";
@@ -6,13 +7,12 @@ const Recommends = () => {
   const [recommends, setRecommends] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/menu-details")
-      .then((res) => res.json())
-      .then((data) => {
-        const popular = data.data.filter((item) => item.category === "popular");
-        setRecommends(popular);
-      });
+    axios.get("http://localhost:8000/api/menu-details").then(({ data }) => {
+      const popular = data?.data?.filter((item) => item?.category === "popular");
+      setRecommends(popular);
+    });
   }, []);
+
   return (
     <section>
       <SectionTitle heading={"CHEF RECOMMENDS"} subHeading={"Should Try"} />

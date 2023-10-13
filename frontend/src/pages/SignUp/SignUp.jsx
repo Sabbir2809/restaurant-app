@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,8 +7,8 @@ import SocialLogin from "../../components/SocialLogin";
 import { useAuth } from "../../context/AuthContext";
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const { createUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -16,31 +17,25 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  // handle submit
+  // handle sign up
   const onSubmit = (data) => {
     createUser(data.email, data.password).then(() => {
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
           const info = { name: data.name, email: data.email };
-          fetch("http://localhost:8000/api/user-profile", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(info),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.status === true) {
-                reset();
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "User Registration Successful",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                navigate("/");
-              }
-            });
+          axios.post("http://localhost:8000/api/user-profile", info).then(({ data }) => {
+            if (data.status === true) {
+              reset();
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Registration Successful",
+                showConfirmButton: false,
+                timer: 1000,
+              });
+              navigate("/");
+            }
+          });
         })
         .catch((error) => {
           console.error(error.message);

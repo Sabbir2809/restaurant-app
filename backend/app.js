@@ -17,7 +17,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(mongoSanitize());
-const limit = rateLimit({ windowMS: 1 * 60 * 1000, max: 60 });
+const limit = rateLimit({ windowMS: 1 * 60 * 1000, max: 100 });
 app.use(limit);
 
 // router

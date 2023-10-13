@@ -3,10 +3,8 @@ import { useAuth } from "../context/AuthContext";
 
 const SocialLogin = () => {
   const { googleSignIn } = useAuth();
-
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
 
   // handle google login

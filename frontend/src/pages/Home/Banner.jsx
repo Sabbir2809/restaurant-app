@@ -9,6 +9,7 @@ import slider6 from "./../../assets/home/06.png";
 
 const Banner = () => {
   return (
+    // Package name: react-responsive-carousel
     <Carousel autoPlay={true} infiniteLoop={true} className="text-center">
       <div>
         <img src={slider1} />

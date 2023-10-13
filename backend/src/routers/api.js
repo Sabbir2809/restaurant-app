@@ -35,6 +35,8 @@ router.post("/user-profile", userController.userProfile);
 router.get("/all-users", authVerifyMiddleware, verifyAdminMiddleware, userController.getAllUsers);
 router.patch("/all-users/admin/:id", userController.makeAdmin);
 router.get("/all-users/admin/:email", authVerifyMiddleware, userController.isAdmin);
+router.get("/admin-home", authVerifyMiddleware, verifyAdminMiddleware, userController.adminHome);
+router.get("/order-stats", userController.orderStats);
 // JWT
 router.post("/jwt", userController.JWT);
 

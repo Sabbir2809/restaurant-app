@@ -79,3 +79,8 @@
 1. Display payment error and success Message
 1. Create payment api and send payment data to the server
 1. Save payment info to the database
+
+---
+
+1. Create Admin dashboard stats api and load data
+1. Display stats on the admin home

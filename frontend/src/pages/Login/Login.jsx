@@ -7,18 +7,17 @@ import SocialLogin from "../../components/SocialLogin";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
-  const [disabled, setDisabled] = useState(true);
   const { signIn } = useAuth();
-
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
 
+  // handle login
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -27,18 +26,18 @@ const Login = () => {
 
     signIn(email, password).then((result) => {
       result.user;
-
       Swal.fire({
-        position: "top-end",
+        position: "center",
         icon: "success",
-        title: "User Login Successful",
+        title: "Login Successful",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1000,
       });
       navigate(from, { replace: true });
     });
   };
 
+  // handle Validate Captcha
   const handleValidateCaptcha = (event) => {
     const user_captcha_value = event.target.value;
     if (validateCaptcha(user_captcha_value)) {

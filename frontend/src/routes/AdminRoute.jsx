@@ -10,7 +10,6 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return <span className="loading loading-ring loading-lg"></span>;
   }
-
   if (user && isAdmin) {
     return children;
   }

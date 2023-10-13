@@ -1,13 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
+import NotFound from "../components/NotFound";
 import Dashboard from "../layout/Dashboard";
 import MainLayout from "../layout/MainLayout";
-import Secret from "../pages/Common/Secret";
 import AddItem from "../pages/Dashboard/AddItem";
+import AdminHome from "../pages/Dashboard/AdminHome";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import ManageItems from "../pages/Dashboard/ManageItems";
 import MyCart from "../pages/Dashboard/MyCart";
 import Payment from "../pages/Dashboard/Payment";
-import Home from "../pages/Home/Home";
+import Reservation from "../pages/Dashboard/Reservation";
+import UserHome from "../pages/Dashboard/UserHome";
+import HomePage from "../pages/Home/HomePage";
 import Login from "../pages/Login/Login";
 import Menu from "../pages/Menu/Menu";
 import Order from "../pages/Order/Order";
@@ -22,7 +25,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <HomePage></HomePage>,
       },
       {
         path: "/menu",
@@ -41,12 +44,8 @@ export const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
-        path: "/secret",
-        element: (
-          <PrivateRoute>
-            <Secret></Secret>
-          </PrivateRoute>
-        ),
+        path: "*",
+        element: <NotFound></NotFound>,
       },
     ],
   },
@@ -58,6 +57,15 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // user routes
+      {
+        path: "user-home",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "reservation",
+        element: <Reservation></Reservation>,
+      },
       {
         path: "my-cart",
         element: <MyCart></MyCart>,
@@ -68,6 +76,14 @@ export const router = createBrowserRouter([
       },
 
       // admin routes
+      {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
       {
         path: "all-users",
         element: (

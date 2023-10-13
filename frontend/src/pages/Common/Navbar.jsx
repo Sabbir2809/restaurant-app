@@ -1,11 +1,14 @@
+import { AiOutlineMenuFold } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import useAdmin from "../../hooks/useAdmin";
 import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
 
   const handleLogOut = () => {
     logout()
@@ -18,18 +21,11 @@ const Navbar = () => {
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
+            <AiOutlineMenuFold />
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box text-white w-52">
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#15151580] rounded-box text-white w-52">
             <li>
               <NavLink to={"/"}>Home</NavLink>
             </li>
@@ -40,7 +36,7 @@ const Navbar = () => {
               <NavLink to={"/order/salad"}>Our Shop</NavLink>
             </li>
             <li>
-              <NavLink to={"/secret"}>Secret</NavLink>
+              <NavLink to={isAdmin ? "/dashboard/admin-home" : "/dashboard/user-home"}>Dashboard</NavLink>
             </li>
             <li>
               <NavLink to={"/dashboard/my-cart"}>
@@ -83,7 +79,7 @@ const Navbar = () => {
             <NavLink to={"/order/salad"}>Our Shop</NavLink>
           </li>
           <li>
-            <NavLink to={"/secret"}>Secret</NavLink>
+            <NavLink to={isAdmin ? "/dashboard/admin-home" : "/dashboard/user-home"}>Dashboard</NavLink>
           </li>
           <li>
             <NavLink to={"/dashboard/my-cart"}>

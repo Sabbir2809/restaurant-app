@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
@@ -8,7 +9,6 @@ const Card = ({ items }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
   const [, refetch] = useCart();
 
   const handleAddToCart = () => {
@@ -21,24 +21,18 @@ const Card = ({ items }) => {
       email: user?.email,
     };
     if (user) {
-      fetch("http://localhost:8000/api/create-carts", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(cartItem),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status) {
-            refetch();
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Food added on the Cart",
-              showConfirmButton: false,
-              timer: 1000,
-            });
-          }
-        });
+      axios.post("http://localhost:8000/api/create-carts", cartItem).then(({ data }) => {
+        if (data.status) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Food added on the Cart",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }
+      });
     } else {
       Swal.fire({
         title: "Please Login to Order the Food",
