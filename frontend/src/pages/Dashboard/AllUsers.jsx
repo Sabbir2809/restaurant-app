@@ -32,7 +32,25 @@ const AllUsers = () => {
       });
   };
 
-  const handleUserDelete = () => {};
+  const handleUserDelete = (id) => {
+    fetch(`http://localhost:8000/api/user-delete/${id}`, {
+      method: "DELETE",
+      headers: { token: token },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Deleted Successful`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   return (
     <div className="w-full p-4">

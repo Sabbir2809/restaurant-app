@@ -33,6 +33,7 @@ router.post("/payments", authVerifyMiddleware, payment.paymentInfo);
 // user and admin
 router.post("/user-profile", userController.userProfile);
 router.get("/all-users", authVerifyMiddleware, verifyAdminMiddleware, userController.getAllUsers);
+router.delete("/user-delete/:id", authVerifyMiddleware, verifyAdminMiddleware, userController.userDelete);
 router.patch("/all-users/admin/:id", userController.makeAdmin);
 router.get("/all-users/admin/:email", authVerifyMiddleware, userController.isAdmin);
 router.get("/admin-home", authVerifyMiddleware, verifyAdminMiddleware, userController.adminHome);

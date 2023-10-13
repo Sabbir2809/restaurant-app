@@ -27,6 +27,23 @@ exports.userProfile = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const data = await UserModel.find({});
+
+    res.status(201).json({
+      status: true,
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({ status: false, error: error.message });
+  }
+};
+
+exports.userDelete = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = { _id: new mongoose.Types.ObjectId(id) };
+
+    const data = await UserModel.deleteOne(query);
+
     res.status(201).json({
       status: true,
       data: data,
@@ -115,7 +132,7 @@ exports.orderStats = async (req, res) => {
     const data = await PaymentModel.aggregate([
       {
         $lookup: {
-          from: "menus",
+          from: "menus", // Ensure this matches the actual collection name of MenuModel
           localField: "_id",
           foreignField: "_id",
           as: "menuItem",
